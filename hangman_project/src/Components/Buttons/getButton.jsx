@@ -1,10 +1,11 @@
 import CustomButtonStyle from "./customButtonStyle";
 
-function GetButton({ text, type='button', onClick }) {
+function GetButton({ text, type = 'button', onClick }) {
     return (
         <>
             <button className={`border rounded-sm px-2  ${CustomButtonStyle(type)}`}
-            onClick={onClick}
+                onClick={onClick}
+                type={type}
             >
                 {text}
             </button>

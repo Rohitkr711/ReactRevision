@@ -16,13 +16,14 @@ function TextInputForm({handleOnSubmit, InputType='text', handleTextInputChange,
                         value={value}
                     />
                 </div>
-                <div className="flex">
+                <div className="flex cursor-pointer">
                     <GetButton
                         text={InputType==="Password"?'Show':'Hide'}
                         onClick={()=>setInputType(InputType==='Password'?'text':'Password')}
+                        type="button"
                     />
                 </div>
-                <div className="flex">
+                <div className="flex cursor-pointer">
                     <GetButton
                         text="Ok"
                         type="Submit"

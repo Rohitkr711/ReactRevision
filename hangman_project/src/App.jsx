@@ -10,8 +10,8 @@ function App() {
       <TextInputFormContainer onSubmit={(value) => console.log("Submitted value", value)} /> */}
 
       <Routes>
-        <Route path="/start" element={<StartPage/>} />
-        <Route path="/play" element={<PlayPage/>} />
+        <Route path="/start" element={<StartPage />} />
+        <Route path="/play" element={<PlayPage />} />
         <Route path="/*" element={<div>Page not found😏</div>} />
 
       </Routes>
