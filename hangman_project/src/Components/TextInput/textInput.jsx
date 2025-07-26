@@ -5,7 +5,7 @@ function TextInput({ InputType = "text", InputValue, onChange, label}) {
             <label>
                 {label && <span>{label}</span>}
                 <input
-                className="px-4 py-2 border border-gray-500 rounded-md w-full"
+                className="px-4 py-2 border border-gray-500 rounded-md w-full text-black"
                     type={InputType}
                     value={InputValue}
                     onChange={onChange}

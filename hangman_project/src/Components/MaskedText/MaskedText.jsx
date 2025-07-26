@@ -1,4 +1,4 @@
-import { getAllCharacters } from "./MaskedTextUtility";
+import { getAllCharacters } from "../../Utility/MaskedTextUtility";
 
 /**
 *
