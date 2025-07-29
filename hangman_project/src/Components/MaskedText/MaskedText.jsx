@@ -9,7 +9,7 @@ import { getAllCharacters } from "../../Utility/MaskedTextUtility";
  */
 function MaskedText({text, usedLetters}) {
     const letters=getAllCharacters(text,usedLetters).split('')
-    console.log(letters);
+    // console.log(letters);
     
   return (
     <>

@@ -2,6 +2,8 @@ import { Route, Routes } from "react-router";
 import StartPage from "./Pages/StartPage/startPage.jsx";
 import PlayPage from "./Pages/PlayPage/playPage.jsx"
 import TextInputFormContainer from "./Components/TextInputForm/textInputFormContainer.jsx"
+import GameOver from "./Components/GameEnd/GameEnd.jsx";
+import HomePage from "./Pages/HomePage/HomePage.jsx";
 
 function App() {
   return (
@@ -12,7 +14,9 @@ function App() {
       <Routes>
         <Route path="/start" element={<StartPage />} />
         <Route path="/play" element={<PlayPage />} />
-        <Route path="/*" element={<div>Page not found😏</div>} />
+        <Route path="/gameEnd" element={<GameOver/>} />
+
+        <Route path="/*" element={<HomePage/>} />
 
       </Routes>
 
