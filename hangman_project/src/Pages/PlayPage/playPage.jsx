@@ -59,30 +59,43 @@ function PlayPage() {
 
   return (
     <>
-      <div>playPage</div>
-      <MaskedText text={wordSelected} usedLetters={usedLetters} />
-      <hr />
+      <div className="playPage-container h-screen w-sreen flex justify-center items-center shadow-xl bg-gradient-to-b from-yellow-500 to-indigo-200">
 
-      <div className="flex justify-between items-center">
-        <div className="basis-2/4">
-          <div className="flex flex-col justify-center items-center gap-10">
+        <div className="flex flex-col justify-evenly gap-6 playPage-ItemContainer w-2/3 h-2/3 px-2">
 
-            <div className="bg-red-600 p-2 rounded-md">Attempt Left :<span>{Attempt}</span></div>
-            <div>
-              <LetterButtons text={wordSelected} usedLetters={usedLetters} onLetterClick={handleOnClickLetter} isWin={isWin} Attempt={Attempt}/>
+          <div className="MaskedElement ">
+            <MaskedText text={wordSelected} usedLetters={usedLetters} />
+          </div>
+          <hr />
+
+          <div className="flex justify-between items-center">
+            <div className="basis-2/4">
+              <div className="flex flex-col justify-center items-center gap-10">
+
+                <div className="bg-red-500 text-white p-2 rounded-md">Attempt Left : <span>{Attempt}</span></div>
+                <div>
+                  <LetterButtons text={wordSelected} usedLetters={usedLetters} onLetterClick={handleOnClickLetter} isWin={isWin} Attempt={Attempt} />
+                </div>
+              </div>
+            </div>
+            <div className="basis-2/4 flex justify-center items-center">
+              <Hangman step={step} isWin={isWin} AttemptLeft={Attempt} />
             </div>
           </div>
-        </div>
-        <div className="basis-2/4 flex justify-center items-center">
-          <Hangman step={step} isWin={isWin} AttemptLeft={Attempt} />
+          <hr />
+
+          <div className="flex justify-center items-center">
+            <div>
+             <Link to="/"><p className="border inline bg-green-500 hover:bg-green-400 px-4 py-2 font-semibold rounded-md">Restart</p></Link>
+            </div>
+          </div>
+
+
+          {!isWin && Attempt === 0 && <GameEnd text="You Lose the game🙁" />}
+          {isWin && <GameEnd text="You Won the game🎉" />}
+
         </div>
       </div>
-
-      <Link to="/start"><p className="border inline rounded-sm bg-red-300">Goto start page</p></Link>
-
-      {!isWin && Attempt === 0 && <GameEnd text="You Lose the game🙁" />}
-      {isWin && <GameEnd text="You Won the game🎉"/>}
-
     </>
 
   )

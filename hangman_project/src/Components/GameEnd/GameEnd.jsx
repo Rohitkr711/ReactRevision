@@ -7,7 +7,7 @@ export default function GameEnd({ text }) {
     const result = location.state?.gameResult;
 
     const playAgainHandler = function () {
-        navigate('/start');
+        navigate('/');
     }
 
     return (

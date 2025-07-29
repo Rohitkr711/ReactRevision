@@ -8,40 +8,47 @@ function TextInputForm({ handleOnSubmit, InputType = 'text', handleTextInputChan
 
     return (
         <>
-            <form className="flex border" onSubmit={handleOnSubmit}>
-                <div className="mr-2 flex-1">
-                    <TextInput
-                        InputType={InputType}
-                        onChange={handleTextInputChange}
-                        label="Enter a word or phrase"
-                        value={value}
-                    />
-                </div>
+        <div className="flex w-full">
 
-                <div className="flex cursor-pointer">
-                    <GetButton
-                        text={InputType === "Password" ? 'Show' : 'Hide'}
-                        onClick={() => setInputType(InputType === 'Password' ? 'text' : 'Password')}
-                        type="button"
-                    />
-                </div>
-                <div className="flex cursor-pointer">
-                        <GetButton
-                            text="Ok"
-                            type="Submit"
+            <form className="flex flex-col gap-8 justify-center items-center w-full" onSubmit={handleOnSubmit}>
+                <div className="flex w-full ">
+                    <div className="w-full">
+                        <TextInput
+                            InputType={InputType}
+                            onChange={handleTextInputChange}
+                            label="Enter a word : Max length-8"
+                            value={value}
                         />
                     </div>
 
-{/* Alternative of useNavigate's state prop. but, can't add validation */}
+                    <div className="cursor-pointer">
+                        <GetButton
+                            text={InputType === "Password" ? 'Show' : 'Hide'}
+                            onClick={() => setInputType(InputType === 'Password' ? 'text' : 'Password')}
+                            type="button"
+                            />
+                    </div>
+                </div>
+
+                <div className="flex cursor-pointer rounded-md">
+                    <GetButton
+                        text="Next"
+                        type="Submit"
+                        btnStyleType="Secondary"
+                        />
+                </div>
+
+                {/* Alternative of useNavigate's state prop. but, can't add validation */}
                 {/* <Link to='/play' state={value}>
                     <div className="flex cursor-pointer">
-                        <GetButton
-                            text="Ok"
-                            type="Submit"
-                        />
+                    <GetButton
+                    text="Ok"
+                    type="Submit"
+                    />
                     </div>
-                </Link> */}
+                    </Link> */}
             </form>
+        </div>
         </>
     )
 }

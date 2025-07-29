@@ -9,11 +9,11 @@ function LetterButtons({ text, usedLetters, onLetterClick, isWin, Attempt}) {
 
     const buttonStyle = function (letter) {
         if (selectedLetters.has(letter))
-            return `${text.has(letter) ? 'bg-green-700' : 'bg-red-700'}`;
+            return `${text.has(letter) ? 'bg-green-600' : 'bg-red-600'}`;
         else if(isWin || Attempt===0)
-            return 'bg-blue-600 border-blue-700';
+            return 'bg-yellow-400 bg-yellow-500';
         else
-            return 'bg-blue-600 border-blue-700 hover:bg-blue-700';
+            return 'bg-yellow-400 border-yellow-500 hover:bg-yellow-500';
 
 
     }
@@ -30,7 +30,7 @@ function LetterButtons({ text, usedLetters, onLetterClick, isWin, Attempt}) {
                 value={letter}
                 disabled={selectedLetters.has(letter)|| isWin || Attempt===0}
                 onClick={handleLetterButtonClick}
-                className={`h-12 w-12 m-1 rounded-md focus-outline-none text-white ${buttonStyle(letter)}`}
+                className={`h-12 w-12 m-1 rounded-md focus-outline-none text-white font-medium shadow-lg outline-none ${buttonStyle(letter)}`}
             >
                 {letter}
             </button>

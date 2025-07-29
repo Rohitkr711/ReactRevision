@@ -6,7 +6,7 @@ export function getAllCharacters(word="Humble", usedLetters=['b','e']){
         if(guessedLetters.has(letter))
             return letter;
         else
-            return '_';
+            return ' ';
     })
     return Allcharacters.join(''); // _ _ _ B _ E
 }

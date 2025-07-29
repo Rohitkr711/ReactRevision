@@ -17,9 +17,9 @@ function HomePage() {
                     <div className="upper-section flex flex-col justify-center items-center gap-8">
                         <h2 className="text-5xl text-white font-mono">Welcome to Hangman!</h2>
                         <button 
-                        className="border px-3 py-1 rounded-md font-semibold bg-green-600"
+                        className="px-3 py-1 rounded-md font-semibold bg-green-400 hover:bg-green-500 border-2"
                         onClick={handleOnClick}
-                        >Let's Play
+                        >Let's Start
                         </button>
                     </div>
 

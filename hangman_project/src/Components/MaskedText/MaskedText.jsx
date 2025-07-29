@@ -13,8 +13,8 @@ function MaskedText({text, usedLetters}) {
     
   return (
     <>
-    <div>{letters.map((letter, idx)=>{
-        return <span key={idx} className="inline-block mx-1">{letter}</span>
+    <div className="flex justify-center items-center">{letters.map((letter, idx)=>{
+        return <span key={idx} className="mx-2 w-6 h-8 border-b-2 text-center shadow-lg border-black text-2xl font-medium">{letter}</span>
     })}
     </div>
     </>
