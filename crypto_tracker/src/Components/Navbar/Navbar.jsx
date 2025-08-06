@@ -1,4 +1,13 @@
-function Navbar({setCurrency}) {
+import { useContext } from "react";
+import { useNavigate } from "react-router";
+import { CurrencyContext } from "../../Context/CurrencyContext";
+
+function Navbar() {
+
+    // const navigate=useNavigate();
+    const{setCurrency}=useContext(CurrencyContext);
+
+
     return (
         <>
             <div className="navbar bg-base-100 shadow-sm">
@@ -15,7 +24,10 @@ function Navbar({setCurrency}) {
                         </ul>
                     </div>
                 </div>
-                <div className="navbar-center">
+                <div className="navbar-center" onClick={()=>{
+                    console.log("Clicked");
+                    
+                    navigate('/details')}}>
                     <a className="btn btn-ghost text-xl">Crypto Tracker</a>
                 </div>
                 <div className="navbar-end">
