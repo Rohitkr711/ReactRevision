@@ -1,11 +1,13 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router";
-import { CurrencyContext } from "../../Context/CurrencyContext";
+// import { CurrencyContext } from "../../Context/CurrencyContext";
+import { CurrencyStore } from "../../CurrencyStore/CurrencyStore.js";
 
 function Navbar() {
 
     // const navigate=useNavigate();
-    const{setCurrency}=useContext(CurrencyContext);
+    // const{setCurrency}=useContext(CurrencyContext);
+    const {setCurrency}=CurrencyStore();
 
 
     return (

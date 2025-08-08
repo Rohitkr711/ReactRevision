@@ -9,7 +9,7 @@ import { CurrencyContext } from "./Context/CurrencyContext";
 
 function App() {
 
-  const[currency, setCurrency]=useState("USD")
+  // const[currency, setCurrency]=useState("USD")
   
 
   return (
@@ -26,10 +26,10 @@ function App() {
 
       </Routes> */}
 
-<CurrencyContext.Provider value={{currency,setCurrency}}>
+{/* <CurrencyContext.Provider value={{currency,setCurrency}}> */}
 
       <HomePage/>
-</CurrencyContext.Provider>
+{/* </CurrencyContext.Provider> */}
 
     </>
   )

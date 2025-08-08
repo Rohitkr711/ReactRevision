@@ -161,3 +161,34 @@ function Navbar() {
 - ContextAPI is in-built in React not in ReactDOM only.
 
 There are some disadvantages of contextAPI like in large complex project we need to do this wrap-up and 
+
+✅Zustand:
+a) It is a third-party state-management library.
+b) It gives a create function with a set function as parameter for updating the states.
+```
+import { create } from 'zustand'
+
+export const CurrencyStore = create((set) => ({
+    currency: 'usd',
+    setCurrency: (newCurrency) => {
+        // console.log('Set function',set);
+        
+        return set((state) => ({
+        ...state,
+        currency: newCurrency
+    }))}
+}))
+```
+c) It is seamless, scalable, reusable, good docs, good integration with TS also.
+d) It also has some advance concepts like middlewares etc.
+https://zustand.docs.pmnd.rs/getting-started/introduction#installation
+
+==TIP== : Make a habbit of reading Docs.
+
+18. TS-Node -> ts-node is an npm package designed to simplify the execution of TypeScript code within the Node.js runtime environment. It functions as a TypeScript execution engine and a REPL (Read-Eval-Print Loop) for Node.js.
+The primary purpose of ts-node is to eliminate the need for a separate, explicit compilation step from TypeScript to JavaScript before running your code. Instead, ts-node performs Just-In-Time (JIT) transformation of TypeScript into JavaScript, allowing you to directly execute .ts files using the node command.
+
+19. When we execute our frontend code then all the third party libraries or dependencies are may or may not written in JS and it can be written in other language also like Java, TS or etc then how our code gets executed by NodeJS? Because we don't change that codes manually into JS.
+
+20. SOLUTION - It is done by a Build
+BUILD - Build is a process that internally use some kind of build tool that help us to compile the whole project which has multiple separated moudules and if we will compile every single module individually then it will take lot of time to run the project. So, build tool simplifies this for us, it simplifies the dependency graph whatever modules need to be compiled first they automatically compile them step-by step and bring our project in a runable stage so that we can run it directly. 
