@@ -10,7 +10,7 @@ function HomePage() {
   return (
     <>
       <div className="h-full w-screen" data-theme="halloween">
-        <Navbar/>
+        {/* <Navbar/> */}
         <Banner/>
         <CoinTable/>
       </div>

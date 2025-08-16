@@ -191,4 +191,174 @@ The primary purpose of ts-node is to eliminate the need for a separate, explicit
 19. When we execute our frontend code then all the third party libraries or dependencies are may or may not written in JS and it can be written in other language also like Java, TS or etc then how our code gets executed by NodeJS? Because we don't change that codes manually into JS.
 
 20. SOLUTION - It is done by a Build
-BUILD - Build is a process that internally use some kind of build tool that help us to compile the whole project which has multiple separated moudules and if we will compile every single module individually then it will take lot of time to run the project. So, build tool simplifies this for us, it simplifies the dependency graph whatever modules need to be compiled first they automatically compile them step-by step and bring our project in a runable stage so that we can run it directly. 
+BUILD - Build is a process that internally use some kind of build tool that help us to compile the whole project which has multiple separated moudules, and if we will compile every single module individually then it will take lot of time to run the project. So, build tool simplifies this for us, it simplifies the dependency graph whatever modules need to be compiled first they automatically compile them step-by step and bring our project in a runable stage so that we can run it directly. 
+
+21. ==Polyfills== : Polyfills are the custom implementation of browser's functionality. Bcoz it could be a case that their is a buggy/old browser which don't support some browser events so, in that case we need to implement it manually.
+In interviews generally DOM, Array, Object related polyfills are asked to implement.
+
+✅ getElementByClassName - Polyfill
+![alt text](image-7.png)
+![alt text](image-8.png)
+
+✅ getElementById - Polyfill
+function getelementByIdCustom(body, idName){
+    let output=[];
+
+    function recurse(imdChild){
+        if(imdChild==null) return;
+        if(imdChild.id == idName){
+            output.push(imdChild);
+        }
+        for(const child of imdChild.children){
+            recurse(child);
+        }
+    }
+    for(const imdChild of body.children){
+        recurse(imdChild);
+    }
+
+    return output;    
+}
+
+let result = getelementByIdCustom(doc.body, "content");
+
+✅ getElementByTagName - Polyfill
+Just use `ele.tagname == tagname` inside recurse function
+
+22. Learn about thisArgs. ❓
+23. Deep-copy & shallow-copy❓
+24. H/W - Make any app using these below APIs
+https://github.com/public-apis/public-apis
+
+25. useParams - It is a hook provided by react-router helps in taking out the value of variable from url.
+```bash
+<Route path="/posts/:postId" element={<Post />} />;
+
+import { useParams } from "react-router";
+
+export default function Post() {
+  let params = useParams();
+  return <h1>Post: {params.postId}</h1>;
+}
+```
+Here ':' represents the dynamic part of url.
+
+26. we should not use the shared layout in App.jsx because of separation of concern and for maintaining shared UI flexibility.
+27. We can implement this share layout using <outlet/> component, provided by react-router. Here `<outlet/>` work as a placeholder for dynamic part of UI.
+```bash
+import React from 'react'
+import Navbar from '../../Components/Navbar/Navbar'
+import { Outlet } from 'react-router'
+
+function MainLayout() {
+    return (
+        <>
+            <Navbar />
+            <Outlet />
+        </>
+    )
+}
+
+export default MainLayout
+```
+```bash
+<Routes>
+    <Route path="/" element={<MainLayout />}>
+        <Route index element={<HomePage />} />
+        <Route path="/details/:coinId" element=<CoinDetails />} />
+    </Route>
+</Routes>
+```
+Here the HomePage component also have '/' path same as MainLayout so for this case Route component provides a index prop which refers to the path of parent.
+
+➡️Here path='/' of mainLayout tells that any url route which will start with '/' will contain MainLayout.
+Can design other Layouts also like MainLayout like "/Admin" etc.
+![alt text](image-9.png)
+![alt text](image-10.png)
+
+==DATE - 16/08/25==
+###### Chrome Devtool (Initial Load Problem)
+➡️Whenever we lands on a home or other page of a react application then after inspecting we can see source codes of that page inside source element.
+![alt text](image-11.png)
+But, here we have landed on home page then why the coindetails page also get pre-loaded❓
+So, there is two aspects of it
+1) For : If All pages gets downloaded at start then user can easily navigate to other pages without any delay.
+2) Against : If we pre-download all the web pages initially where user yet to go then it can increase the initial loading of our site.
+Ex - BookMyshow(BMS) have 100s of pages & if it download all it's 100s of pages on initial load then there is a big network payload which we have to download & so it can hamper the initial load of BMS. And this is one of a big problems in frontend apps i.e initial load time.
+So, now if we want to reduce the initial load time so that our user can land on our site as fast as possible so for that we need to Download the pages as less as possible on initial load.
+
+How to handle this❓(till yet we are doing eager loading)
+💡Sol - May be we can delay the downloading of pages other than home page on initial loading and then download the remaining ones as per the need. So, this is called Lazy Loading and its is a CS Concept not related to React only.
+In CS whenever we want to delay some process to be execute after some time thats where Lazy Load comes into picture.
+
+28. React auto provide the Lazy Loading function
+```bash
+import { Routes, Route } from "react-router";
+import MainLayout from "../../Pages/Layout/MainLayout.jsx";
+import { lazy } from 'react';
+
+const HomePage = lazy(() => import("../../Pages/HomePage/HomePage"))
+const CoinDetailsPage = lazy(() => import("../../Pages/CoinDetails/CoinDetails.jsx"))
+
+function Routing() {
+    return (
+        <>
+            <Routes>
+                <Route path="/" element={<MainLayout />}>
+                    <Route index element={<HomePage />} />
+                    <Route path="/details/:coinId" element={<CoinDetailsPage />} />
+
+                </Route>
+            </Routes>
+        </>
+    )
+}
+export default Routing;
+```
+Now there is no any coinDetailsPage got downloaded when we land on home page
+![alt text](image-12.png)
+But then after clicking on perticular coin we navigated to the coindetails page and then that page gets downloaded.
+![alt text](image-13.png)
+29. In our crypto code when we move from homePage to coinDetailsPage then here firstly coin details page get download from the Reactserver then the API call will be done but during that time of lazy loading what to show on UI❓. This is one problem for react.
+![alt text](image-14.png)
+Real life Ex - Shopkeeper biscuit example
+30. So for solving broken UI during navigation react provide ==React Suspense== for handling UI during the lazy loading time, Just like useQuery give us isLoading state. Suspense tells what to show on UI as an alternate using fallback prop till the time there is loading something
+![alt text](image-15.png)
+This is the fallback UI(DetailsPage Loading...) using Suspense.
+![alt text](image-16.png)
+This is Api calling handling using useQuery after the Coin-Details page got loaded.
+31. 🧠SWR❓
+32. We can also use components of ==react-content-loader package== as a fallback for showing fall back UI till the page is not downloaded.
+33. We can also make our custom page loader components also.
+import ContentLoader from 'react-content-loader';
+```
+function CustomPageLoader() {
+return(
+
+    <ContentLoader
+    height={140}
+    speed={1}
+    backgroundColor={'#333'}
+    foregroundColor={'#999'}
+    viewBox="0 0 380 70"
+    >
+    {/* Only SVG shapes */}
+    <rect x="0" y="0" rx="5" ry="5" width="70" height="70" />
+    <rect x="80" y="17" rx="4" ry="4" width="300" height="13" />
+    <rect x="80" y="40" rx="3" ry="3" width="250" height="10" />
+  </ContentLoader>
+)
+
+}
+
+export default CustomPageLoader;
+```
+34. We can also apply react content loader components during data fetching also.
+```bash
+ if (isLoading) {
+    return (<BulletList />)
+  }
+```
+35. If Any Comp we want to lazily load it then we can use react lazy function in it bcoz pages are somewhere also a component right.
+36. This whole concept of downloading things separately whenever needed on page and component level using lazy loading is called code splitting.
+37. We can add lazy & suspense to every comp of a page if required. 

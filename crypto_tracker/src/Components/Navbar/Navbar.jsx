@@ -5,9 +5,14 @@ import { CurrencyStore } from "../../CurrencyStore/CurrencyStore.js";
 
 function Navbar() {
 
-    // const navigate=useNavigate();
+    const navigate=useNavigate();
     // const{setCurrency}=useContext(CurrencyContext);
     const {setCurrency}=CurrencyStore();
+    function handleBackToHomePage(){
+        console.log('inside handle BTHP');
+        
+       navigate('/')
+    }
 
 
     return (
@@ -21,15 +26,12 @@ function Navbar() {
                         <ul
                             tabIndex={0}
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                                <button onClick={()=>setCurrency('INR')}>INR</button>
-                                <button onClick={()=>setCurrency('USD')}>USD</button>
+                                <button onClick={()=>setCurrency('inr')} className="hover:bg-gray-100 cursor-pointer">INR</button>
+                                <button onClick={()=>setCurrency('usd')} className="hover:bg-gray-100 cursor-pointer">USD</button>
                         </ul>
                     </div>
                 </div>
-                <div className="navbar-center" onClick={()=>{
-                    console.log("Clicked");
-                    
-                    navigate('/details')}}>
+                <div className="navbar-center" onClick={handleBackToHomePage}>
                     <a className="btn btn-ghost text-xl">Crypto Tracker</a>
                 </div>
                 <div className="navbar-end">

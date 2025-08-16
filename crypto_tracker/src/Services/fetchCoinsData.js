@@ -1,7 +1,7 @@
 import { axiosInstance } from "../Helpers/axiosInstance";
 
 let count=0;
-export async function fetchCoinData(pageNo=1, currency='INR'){
+export async function fetchCoinsData(pageNo=1, currency='INR'){
     
     const perPageData=10;
 
