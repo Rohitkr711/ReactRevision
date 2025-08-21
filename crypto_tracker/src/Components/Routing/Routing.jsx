@@ -3,6 +3,7 @@ import MainLayout from "../../Pages/Layout/MainLayout.jsx";
 import { lazy, Suspense } from 'react';
 // import { Facebook } from 'react-content-loader';
 import CustomPageLoader from "../PageLoader/CustomPageLoader.jsx";
+import CustomErrorBoundry from "../ErrorBoundry/CustomErrorBoundryUI.jsx";
 
 const HomePage = lazy(() => import("../../Pages/HomePage/HomePage"))
 const CoinDetailsPage = lazy(() => import("../../Pages/CoinDetails/CoinDetails.jsx"))
@@ -10,24 +11,26 @@ const CoinDetailsPage = lazy(() => import("../../Pages/CoinDetails/CoinDetails.j
 function Routing() {
     return (
         <>
-            <Routes>
-                <Route path="/" element={<MainLayout />}>
+            <CustomErrorBoundry>
+                <Routes>
+                    <Route path="/" element={<MainLayout />}>
 
-                    <Route index element={
-                        <Suspense fallback={<CustomPageLoader/>}>
-                            <HomePage />
-                        </Suspense>
-                        } 
-                    />
-
-                    <Route path="/details/:coinId" element={
-                        <Suspense fallback={<CustomPageLoader/>}>
-                            <CoinDetailsPage />
-                        </Suspense>
+                        <Route index element={
+                            <Suspense fallback={<CustomPageLoader />}>
+                                <HomePage />
+                            </Suspense>
                         }
-                    />
-                </Route>
-            </Routes>
+                        />
+
+                        <Route path="/details/:coinId" element={
+                            <Suspense fallback={<CustomPageLoader />}>
+                                <CoinDetailsPage />
+                            </Suspense>
+                        }
+                        />
+                    </Route>
+                </Routes>
+            </CustomErrorBoundry>
         </>
     )
 }

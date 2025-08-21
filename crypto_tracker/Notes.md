@@ -361,4 +361,4 @@ export default CustomPageLoader;
 ```
 35. If Any Comp we want to lazily load it then we can use react lazy function in it bcoz pages are somewhere also a component right.
 36. This whole concept of downloading things separately whenever needed on page and component level using lazy loading is called code splitting.
-37. We can add lazy & suspense to every comp of a page if required. 
+37. We can add lazy & suspense to every comp of a page if required.

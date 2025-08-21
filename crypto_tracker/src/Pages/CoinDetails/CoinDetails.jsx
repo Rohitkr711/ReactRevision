@@ -2,12 +2,17 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router";
 import { fetchCoinDataById } from "../../Services/fetchCoinDataById";
 import { CurrencyStore } from "../../CurrencyStore/CurrencyStore";
+import CustomPageLoader from "../../Components/PageLoader/CustomPageLoader";
+import coinInfoContainer from "../../Components/CoinDetailInfo/CoinDetailInfoContainer";
+import CoinDetailInfoContainer from "../../Components/CoinDetailInfo/CoinDetailInfoContainer";
 
 function CoinDetails() {
+  console.log("CoinDetails Mounted");
+  
 
   const {currency}=CurrencyStore();
   const { coinId } = useParams();
-  const { data: coin, isLoading, isError, error } = useQuery({
+  const { data: coin, isLoading, isError, error,status } = useQuery({
     queryKey: ['coin', coinId,currency],
     queryFn: () => fetchCoinDataById(coinId,currency),
     cacheTime: 1000 * 60 * 2,
@@ -22,22 +27,28 @@ function CoinDetails() {
   if (isLoading) {
     return (<div>Data Loading...</div>)
   }
+  if(status=='pending'){
+    return (<div>You're offline</div>)
+  }
+  if(status=='paused'){
+    return (<div>data fetching paused</div>)
+  }
 
   return (
     <>
-      <div className="flex flex-col md:flex-row">
-        <div className="md:w-1/3 w-full flex flex-col items-center mt-6 md:mt-0 border-1 border-blue-500">
+      {coin && (<div className="flex flex-col md:flex-row">
+        <div className="md:w-1/3 w-full flex flex-col items-center mt-6 md:mt-0 border-r-1">
           <img
             src={coin?.image?.large}
             alt={coin?.name}
-            className="h-52 mb-5 border-1 border-blue-500"
+            className="h-52 mb-5"
           />
 
-          <h1 className="text-4xl font-bold mb-5 border-1 border-red-500">
+          <h1 className="text-4xl font-bold mb-5">
             {coin?.name}
           </h1>
 
-          <p className="w-full px-6 py-4 text-justify border-1 border-green-500">
+          <p className="w-full px-6 py-4 text-justify">
             {coin?.description?.en}
           </p>
 
@@ -66,9 +77,10 @@ function CoinDetails() {
         </div>
 
         <div className="md:w-2/3 w-full p-6">
-          coin Information
+          <CoinDetailInfoContainer/>
         </div>
-      </div>
+      </div>)
+      }
     </>
   )
 }

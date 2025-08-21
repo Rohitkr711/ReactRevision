@@ -3,7 +3,7 @@ import { axiosInstance } from "../Helpers/axiosInstance";
 let count=0;
 export async function fetchCoinsData(pageNo=1, currency='INR'){
     
-    const perPageData=10;
+    const perPageData=20;
 
     try {
         const response = await axiosInstance.get(`/coins/markets?vs_currency=${currency}&order&per_page=${perPageData}&page=${pageNo}`);
