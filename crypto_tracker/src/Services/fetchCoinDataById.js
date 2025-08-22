@@ -14,7 +14,6 @@ export async function fetchCoinDataById(id,currency='usd'){
     } catch (error) {
         console.log(error);
         return null;
-        // throw error
         
     }
 }
